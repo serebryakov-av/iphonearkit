@@ -45,7 +45,7 @@
 	equal = equal && self.inclination == otherCoordinate.inclination;
 	equal = equal && self.azimuth == otherCoordinate.azimuth;
 		
-	if (self.title && otherCoordinate.title || self.title && !otherCoordinate.title || !self.title && otherCoordinate.title) {
+	if ((self.title && otherCoordinate.title) || (self.title && !otherCoordinate.title) || (!self.title && otherCoordinate.title)) {
 		equal = equal && [self.title isEqualToString:otherCoordinate.title];
 	}
 	

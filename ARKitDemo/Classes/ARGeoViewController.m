@@ -22,7 +22,8 @@
 		if ([geoLocation isKindOfClass:[ARGeoCoordinate class]]) {
 			[geoLocation calibrateUsingOrigin:centerLocation];
 			
-			if (geoLocation.radialDistance > self.maximumScaleDistance) {
+			if ((((self.maximumDrawDistance > 0) && (geoLocation.radialDistance < self.maximumDrawDistance)) || (self.maximumDrawDistance < 0)) &&
+				(geoLocation.radialDistance > self.maximumScaleDistance)) {
 				self.maximumScaleDistance = geoLocation.radialDistance;
 			}
 		}

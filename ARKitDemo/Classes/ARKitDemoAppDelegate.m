@@ -19,210 +19,83 @@
 	
 	ARGeoViewController *viewController = [[ARGeoViewController alloc] init];
 	viewController.debugMode = YES;
-	
 	viewController.delegate = self;
-	
 	viewController.scaleViewsBasedOnDistance = YES;
 	viewController.minimumScaleFactor = .5;
-	
 	viewController.rotateViewsBasedOnPerspective = YES;
+	viewController.maximumDrawDistance = -1;
 	
 	NSMutableArray *tempLocationArray = [[NSMutableArray alloc] initWithCapacity:10];
 	
-	CLLocation *tempLocation;
-	ARGeoCoordinate *tempCoordinate;
-	
-	CLLocationCoordinate2D location;
-	location.latitude = 39.550051;
-	location.longitude = -105.782067;
-	
-	tempLocation = [[CLLocation alloc] initWithCoordinate:location altitude:1609.0 horizontalAccuracy:1.0 verticalAccuracy:1.0 timestamp:[NSDate date]];
-	
-	tempCoordinate = [ARGeoCoordinate coordinateWithLocation:tempLocation];
-	tempCoordinate.title = @"Denver";
-	
-	[tempLocationArray addObject:tempCoordinate];
-	[tempLocation release];
-	
-	
-	tempLocation = [[CLLocation alloc] initWithLatitude:45.523875 longitude:-122.670399];
-	
-	tempCoordinate = [ARGeoCoordinate coordinateWithLocation:tempLocation];
-	tempCoordinate.title = @"Portland";
-	
-	[tempLocationArray addObject:tempCoordinate];
-	[tempLocation release];
-	
-	
-	tempLocation = [[CLLocation alloc] initWithLatitude:41.879535 longitude:-87.624333];
-	
-	tempCoordinate = [ARGeoCoordinate coordinateWithLocation:tempLocation];
-	tempCoordinate.title = @"Chicago";
-	
-	[tempLocationArray addObject:tempCoordinate];
-	[tempLocation release];
-	
-	
-	tempLocation = [[CLLocation alloc] initWithLatitude:30.268735 longitude:-97.745209];
-	
-	tempCoordinate = [ARGeoCoordinate coordinateWithLocation:tempLocation];
-	tempCoordinate.title = @"Austin";
-	
-	[tempLocationArray addObject:tempCoordinate];
-	[tempLocation release];
-	
-	
-	tempLocation = [[CLLocation alloc] initWithLatitude:51.500152 longitude:-0.126236];
-	
-	tempCoordinate = [ARGeoCoordinate coordinateWithLocation:tempLocation];
-	tempCoordinate.inclination = M_PI/30;
-	tempCoordinate.title = @"London";
-	
-	[tempLocationArray addObject:tempCoordinate];
-	[tempLocation release];
-	
-	
-	tempLocation = [[CLLocation alloc] initWithLatitude:48.856667 longitude:2.350987];
-	
-	tempCoordinate = [ARGeoCoordinate coordinateWithLocation:tempLocation];
-	tempCoordinate.inclination = M_PI/30;
-	tempCoordinate.title = @"Paris";
-	
-	[tempLocationArray addObject:tempCoordinate];
-	[tempLocation release];
-	
-	
-	tempLocation = [[CLLocation alloc] initWithLatitude:47.620973 longitude:-122.347276];
-	
-	tempCoordinate = [ARGeoCoordinate coordinateWithLocation:tempLocation];
-	tempCoordinate.title = @"Seattle";
-	
-	[tempLocationArray addObject:tempCoordinate];
-	[tempLocation release];
-	
-	
-	tempLocation = [[CLLocation alloc] initWithLatitude:20.593684 longitude:78.96288];
-	
-	tempCoordinate = [ARGeoCoordinate coordinateWithLocation:tempLocation];
-	tempCoordinate.inclination = M_PI/32;
-	tempCoordinate.title = @"India";
-	
-	[tempLocationArray addObject:tempCoordinate];
-	[tempLocation release];
-	
-	
-	tempLocation = [[CLLocation alloc] initWithLatitude:55.676294 longitude:12.568116];
-	
-	tempCoordinate = [ARGeoCoordinate coordinateWithLocation:tempLocation];
-	tempCoordinate.inclination = M_PI/30;
-	tempCoordinate.title = @"Copenhagen";
-	
-	[tempLocationArray addObject:tempCoordinate];
-	[tempLocation release];
-	
-	
-	tempLocation = [[CLLocation alloc] initWithLatitude:52.373801 longitude:4.890935];
-	
-	tempCoordinate = [ARGeoCoordinate coordinateWithLocation:tempLocation];
-	tempCoordinate.inclination = M_PI/30;
-	tempCoordinate.title = @"Amsterdam";
-	
-	[tempLocationArray addObject:tempCoordinate];
-	[tempLocation release];
-	
-	
-	tempLocation = [[CLLocation alloc] initWithLatitude:19.611544 longitude:-155.665283];
-	
-	tempCoordinate = [ARGeoCoordinate coordinateWithLocation:tempLocation];
-	tempCoordinate.inclination = M_PI/30;
-	tempCoordinate.title = @"Hawaii";
-	
-	[tempLocationArray addObject:tempCoordinate];
-	[tempLocation release];
-	
-	
-	tempLocation = [[CLLocation alloc] initWithLatitude:-40.900557 longitude:174.885971];
-	
-	tempCoordinate = [ARGeoCoordinate coordinateWithLocation:tempLocation];
-	tempCoordinate.inclination = M_PI/40;
-	tempCoordinate.title = @"New Zealand";
-	
-	[tempLocationArray addObject:tempCoordinate];
-	[tempLocation release];
-	
-	
-	tempLocation = [[CLLocation alloc] initWithLatitude:40.756054 longitude:-73.986951];
-	
-	tempCoordinate = [ARGeoCoordinate coordinateWithLocation:tempLocation];
-	tempCoordinate.title = @"New York City";
-	
-	[tempLocationArray addObject:tempCoordinate];
-	[tempLocation release];
-	
-	
-	tempLocation = [[CLLocation alloc] initWithLatitude:42.35892 longitude:-71.05781];
-	
-	tempCoordinate = [ARGeoCoordinate coordinateWithLocation:tempLocation];
-	tempCoordinate.title = @"Boston";
-	
-	[tempLocationArray addObject:tempCoordinate];
-	[tempLocation release];
-	
-	
-	tempLocation = [[CLLocation alloc] initWithLatitude:49.817492 longitude:15.472962];
-	
-	tempCoordinate = [ARGeoCoordinate coordinateWithLocation:tempLocation];
-	tempCoordinate.inclination = M_PI/30;
-	tempCoordinate.title = @"Czech Republic";
-	
-	[tempLocationArray addObject:tempCoordinate];
-	[tempLocation release];
-	
-	
-	tempLocation = [[CLLocation alloc] initWithLatitude:53.41291 longitude:-8.24389];
-	
-	tempCoordinate = [ARGeoCoordinate coordinateWithLocation:tempLocation];
-	tempCoordinate.inclination = M_PI/30;
-	tempCoordinate.title = @"Ireland";
-	
-	[tempLocationArray addObject:tempCoordinate];
-	[tempLocation release];
-	
-	
-	tempLocation = [[CLLocation alloc] initWithLatitude:45.545447 longitude:-73.639076];
-	
-	tempCoordinate = [ARGeoCoordinate coordinateWithLocation:tempLocation];
-	tempCoordinate.title = @"Montreal";
-	
-	[tempLocationArray addObject:tempCoordinate];
-	[tempLocation release];
-	
-	
-	tempLocation = [[CLLocation alloc] initWithLatitude:38.892091 longitude:-77.024055];
-	
-	tempCoordinate = [ARGeoCoordinate coordinateWithLocation:tempLocation];
-	tempCoordinate.title = @"Washington, DC";
-	
-	[tempLocationArray addObject:tempCoordinate];
-	[tempLocation release];
-	
-	
-	tempLocation = [[CLLocation alloc] initWithLatitude:-40.900557 longitude:174.885971];
-	
-	tempCoordinate = [ARGeoCoordinate coordinateWithLocation:tempLocation];
-	tempCoordinate.title = @"Munich";
-	
-	[tempLocationArray addObject:tempCoordinate];
-	[tempLocation release];
-	
-	tempLocation = [[CLLocation alloc] initWithLatitude:32.781078 longitude:-96.797111];
-	
-	tempCoordinate = [ARGeoCoordinate coordinateWithLocation:tempLocation];
-	tempCoordinate.title = @"Dallas";
-	
-	[tempLocationArray addObject:tempCoordinate];
-	[tempLocation release];
-	
+	CLLocation *tempLocation = nil;
+	ARGeoCoordinate *tempCoordinate = nil;
+	
+	{
+		CLLocationCoordinate2D location;
+		location.latitude = 39.550051;
+		location.longitude = -105.782067;
+		
+		tempLocation = [[CLLocation alloc] initWithCoordinate:location altitude:1609.0 horizontalAccuracy:1.0 verticalAccuracy:1.0 timestamp:[NSDate date]];
+		
+		tempCoordinate = [ARGeoCoordinate coordinateWithLocation:tempLocation];
+		tempCoordinate.title = @"Denver";
+		
+		[tempLocationArray addObject:tempCoordinate];
+		[tempLocation release]; tempLocation = nil;
+	}
+	
+	typedef struct {
+		CLLocationCoordinate2D coordinate; /* latitude, longitude */
+		CLLocationDegrees inclination;
+		NSString *title;
+	} NamedCoordinate;
+	
+	static const NamedCoordinate TheCoords[] = {
+		/*{ latitude, longitude }, @"[Place] Title" */
+		{{  48.649271,   44.430652 },       0, @"[ФизФак] Школа" },
+		{{  48.650827,   44.431661 },       0, @"[ФизФак] Девятиэтажка" },
+		{{  48.650407,   44.433066 },       0, @"[ФизФак] Общага" },
+		{{  48.647838,   44.421405 },       0, @"[ФизФак] Янтарный город" },
+		{{  48.647571,   44.431296 },       0, @"[ФизФак] Другая девятиэтажка" },
+		{{  48.697346,   44.494919 },       0, @"[Офис] (70м) Дом через дорогу по диагонали" },
+		{{  48.698103,   44.493996 },       0, @"[Офис] (90м) “Волгоградэнергооблгаз”, в сторону ж/д" },
+		{{  48.697579,   44.492226 },       0, @"[Офис] (130м) Ближайшая школа, к северо-западу" },
+		{{  48.689633,   44.492977 },       0, @"[Офис] Столовая №1" },
+		{{  45.523875, -122.670399 },       0, @"Portland" },
+		{{  41.879535,  -87.624333 },       0, @"Chicago" },
+		{{  30.268735,  -97.745209 },       0, @"Austin" },
+		{{  51.500152,   -0.126236 }, M_PI/30, @"London" },
+		{{  51.500152,   -0.126236 }, M_PI/30, @"Paris" },
+		{{  47.620973, -122.347276 },       0, @"Seattle" },
+		{{  20.593684,   78.962880 }, M_PI/32, @"India" },
+		{{  55.676294,   12.568116 }, M_PI/30, @"Copenhagen" },
+		{{  52.373801,    4.890935 }, M_PI/30, @"Amsterdam" },
+		{{  19.611544, -155.665283 }, M_PI/30, @"Hawaii" },
+		{{ -40.900557,  174.885971 }, M_PI/40, @"New Zealand" },
+		{{  40.756054,  -73.986951 },       0, @"New York City" },
+		{{  42.358920,  -71.057810 },       0, @"Boston" },
+		{{  49.817492,   15.472962 }, M_PI/30, @"Czech Republic" },
+		{{  53.412910,   -8.243890 }, M_PI/30, @"Ireland" },
+		{{  45.545447,  -73.639076 },       0, @"Montreal" },
+		{{  38.892091,  -77.024055 },       0, @"Washington, DC" },
+		{{ -40.900557,  174.885971 },       0, @"Munich" },
+		{{  32.781078,  -96.797111 },       0, @"Dallas" },
+		{{ 0, 0 }, 0, nil } // The end of array
+	};
+	
+	for (const NamedCoordinate *item = &TheCoords[0]; item->title != nil; item++)
+	{
+		tempLocation = [[CLLocation alloc] initWithLatitude:item->coordinate.latitude longitude:item->coordinate.longitude];
+		
+		tempCoordinate = [ARGeoCoordinate coordinateWithLocation:tempLocation];
+		tempCoordinate.inclination = item->inclination;
+		tempCoordinate.title = item->title;
+		
+		[tempLocationArray addObject:tempCoordinate];
+		[tempLocation release]; tempLocation = nil;
+		
+		NSLog(@"Coord (%f; %f) [%@] added!", item->coordinate.latitude, item->coordinate.longitude, item->title);
+	}
 	
 	[viewController addCoordinates:tempLocationArray];
 	[tempLocationArray release];

@@ -43,9 +43,9 @@
 
 
 @interface ARCoordinate : NSObject {
-	double radialDistance;
-	double inclination;
-	double azimuth;
+	CLLocationDistance radialDistance;
+	CLLocationDegrees inclination;
+	CLLocationDegrees azimuth;
 	
 	NSString *title;
 	NSString *subtitle;

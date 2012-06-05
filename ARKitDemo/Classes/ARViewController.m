@@ -21,6 +21,7 @@
 @synthesize scaleViewsBasedOnDistance, rotateViewsBasedOnPerspective;
 @synthesize maximumScaleDistance;
 @synthesize minimumScaleFactor, maximumRotationAngle;
+@synthesize maximumDrawDistance;
 
 @synthesize updateFrequency;
 
@@ -31,6 +32,14 @@
 @synthesize delegate, locationDelegate, accelerometerDelegate;
 
 @synthesize cameraController;
+
+// Is augmented reality avaible on current device
++ (BOOL)isAvaible
+{
+	return [CLLocationManager headingAvailable] &&
+    [CLLocationManager locationServicesEnabled] &&
+    [UIAccelerometer sharedAccelerometer];
+}
 
 - (id)init {
 	if (!(self = [super init])) return nil;
@@ -61,6 +70,8 @@
 	self.scaleViewsBasedOnDistance = NO;
 	self.maximumScaleDistance = 0.0;
 	self.minimumScaleFactor = 1.0;
+	
+	self.maximumDrawDistance = -1; // In meters (Don't used if <= 0)
 	
 	self.rotateViewsBasedOnPerspective = NO;
 	self.maximumRotationAngle = M_PI / 6.0;
@@ -117,6 +128,20 @@
 													repeats:YES] retain];
 }
 
+- (void)setMaximumDrawDistance:(CLLocationDistance)newMaximumDrawDistance
+{
+	maximumDrawDistance = newMaximumDrawDistance;
+	
+	self.maximumScaleDistance = 0;
+	
+	for (ARCoordinate *coordinate in ar_coordinates)
+	{
+		if ((((self.maximumDrawDistance > 0) && (coordinate.radialDistance < self.maximumDrawDistance)) || (self.maximumDrawDistance < 0)) &&
+			(coordinate.radialDistance > self.maximumScaleDistance))
+			self.maximumScaleDistance = coordinate.radialDistance;
+	}
+}
+
 - (void)setDebugMode:(BOOL)flag {
 	if (self.debugMode == flag) return;
 	
@@ -130,6 +155,10 @@
 }
 
 - (BOOL)viewportContainsCoordinate:(ARCoordinate *)coordinate {
+	if (self.maximumDrawDistance > 0 &&
+		coordinate.radialDistance > self.maximumDrawDistance)
+		return NO;
+	
 	double centerAzimuth = self.centerCoordinate.azimuth;
 	double leftAzimuth = centerAzimuth - VIEWPORT_WIDTH_RADIANS / 2.0;
 	
@@ -174,9 +203,10 @@
 		
 		//we want every move.
 		self.locationManager.headingFilter = kCLHeadingFilterNone;
-		self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+		self.locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation;
 		
 		[self.locationManager startUpdatingHeading];
+		[self.locationManager startUpdatingLocation];
 	}
 	
 	//steal back the delegate.
@@ -276,7 +306,8 @@ NSComparisonResult LocationSortClosestFirst(ARCoordinate *s1, ARCoordinate *s2, 
 	//do some kind of animation?
 	[ar_coordinates addObject:coordinate];
 		
-	if (coordinate.radialDistance > self.maximumScaleDistance) {
+	if ((((self.maximumDrawDistance > 0) && (coordinate.radialDistance < self.maximumDrawDistance)) || (self.maximumDrawDistance < 0)) &&
+		(coordinate.radialDistance > self.maximumScaleDistance)) {
 		self.maximumScaleDistance = coordinate.radialDistance;
 	}
 	
@@ -397,9 +428,15 @@ NSComparisonResult LocationSortClosestFirst(ARCoordinate *s1, ARCoordinate *s2, 
 }
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation {
+	
 	if (self.locationDelegate && [self.locationDelegate respondsToSelector:@selector(locationManager:didUpdateToLocation:fromLocation:)]) {
 		//forward the call.
 		[self.locationDelegate locationManager:manager didUpdateToLocation:newLocation fromLocation:oldLocation];
+	}
+	else if ([self respondsToSelector:@selector(setCenterLocation:)])
+	{
+		NSLog(@"CurrentLocation: %@", newLocation);
+		[self performSelector:@selector(setCenterLocation:) withObject:newLocation];
 	}
 }
 

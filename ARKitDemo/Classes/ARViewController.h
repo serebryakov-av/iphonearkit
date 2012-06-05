@@ -54,18 +54,23 @@
 	NSMutableArray *ar_coordinateViews;
 }
 
+// Is augmented reality avaible on current device
++ (BOOL)isAvaible;
+
 @property (readonly) NSArray *coordinates;
 
-@property BOOL debugMode;
+@property (nonatomic) BOOL debugMode;
 
 @property BOOL scaleViewsBasedOnDistance;
 @property double maximumScaleDistance;
 @property double minimumScaleFactor;
 
+@property (nonatomic) CLLocationDistance maximumDrawDistance; // In meters (Don't used if <= 0)
+
 @property BOOL rotateViewsBasedOnPerspective;
 @property double maximumRotationAngle;
 
-@property double updateFrequency;
+@property (nonatomic) double updateFrequency;
 
 //adding coordinates to the underlying data model.
 - (void)addCoordinate:(ARCoordinate *)coordinate;
