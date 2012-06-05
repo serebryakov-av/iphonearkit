@@ -10,8 +10,8 @@
 
 #import <QuartzCore/QuartzCore.h>
 
-#define VIEWPORT_WIDTH_RADIANS .5
-#define VIEWPORT_HEIGHT_RADIANS .7392
+#define VIEWPORT_WIDTH_RADIANS (.5 + .2)
+#define VIEWPORT_HEIGHT_RADIANS (.7392 + .2)
 
 @implementation ARViewController
 
@@ -409,7 +409,7 @@ NSComparisonResult LocationSortClosestFirst(ARCoordinate *s1, ARCoordinate *s2, 
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateHeading:(CLHeading *)newHeading {
 		
-	self.centerCoordinate.azimuth = fmod(newHeading.magneticHeading, 360.0) * (2 * (M_PI / 360.0));
+	self.centerCoordinate.azimuth = fmod(newHeading.trueHeading, 360.0) * (2 * (M_PI / 360.0));
 	
 	if (self.locationDelegate && [self.locationDelegate respondsToSelector:@selector(locationManager:didUpdateHeading:)]) {
 		//forward the call.
