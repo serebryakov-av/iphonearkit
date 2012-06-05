@@ -14,6 +14,18 @@
 
 @synthesize centerLocation;
 
+- (void)startListening
+{
+#if 1 || defined (DEBUG)
+		// [Sunnyvale, CA] Yahoo!
+		CLLocation *newCenter = [[CLLocation alloc] initWithLatitude:37.41711 longitude:-122.02528];
+		self.centerLocation = newCenter;
+		[newCenter release];
+#endif
+	
+	[super startListening];
+}
+
 - (void)setCenterLocation:(CLLocation *)newLocation {
 	[centerLocation release];
 	centerLocation = [newLocation retain];

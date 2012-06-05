@@ -99,12 +99,7 @@
 	
 	[viewController addCoordinates:tempLocationArray];
 	[tempLocationArray release];
-		
-	CLLocation *newCenter = [[CLLocation alloc] initWithLatitude:37.41711 longitude:-122.02528];
-	
-	viewController.centerLocation = newCenter;
-	[newCenter release];
-	
+
 	[viewController startListening];
 	
 	[window addSubview:viewController.view];
