@@ -138,7 +138,7 @@
 				11609B0A1026014F00A964C8 /* ARGeoView.m */,
 			);
 			name = ARKIt;
-			path = Classes;
+			path = ARKit;
 			sourceTree = "<group>";
 		};
 		19C28FACFE9D520D11CA2CBB /* Products */ = {
