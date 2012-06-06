@@ -108,7 +108,6 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				111A142D1024C8AC002D39A1 /* ARKIt */,
 				7F3F101A157F832B0050EA39 /* MainVC.h */,
 				7F3F101B157F832B0050EA39 /* MainVC.m */,
 				1D3623240D0F684500981E51 /* ARKitDemoAppDelegate.h */,
@@ -139,6 +138,7 @@
 				11609B0A1026014F00A964C8 /* ARGeoView.m */,
 			);
 			name = ARKIt;
+			path = Classes;
 			sourceTree = "<group>";
 		};
 		19C28FACFE9D520D11CA2CBB /* Products */ = {
@@ -154,6 +154,7 @@
 			isa = PBXGroup;
 			children = (
 				7F3F1025157F887F0050EA39 /* CoreMedia.framework */,
+				111A142D1024C8AC002D39A1 /* ARKIt */,
 				080E96DDFE201D6D7F000001 /* Classes */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
 				11192950106E7C9F00D96627 /* Tests */,
