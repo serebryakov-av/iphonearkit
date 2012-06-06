@@ -153,7 +153,6 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
-				7F3F1025157F887F0050EA39 /* CoreMedia.framework */,
 				111A142D1024C8AC002D39A1 /* ARKIt */,
 				080E96DDFE201D6D7F000001 /* Classes */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
@@ -190,6 +189,7 @@
 			children = (
 				7F3F101F157F85EF0050EA39 /* AVFoundation.framework */,
 				7F3F101D157F85E90050EA39 /* CoreVideo.framework */,
+				7F3F1025157F887F0050EA39 /* CoreMedia.framework */,
 				1109BC301082F1B2006FFB4B /* QuartzCore.framework */,
 				116DC886102933A200EB5A0A /* MapKit.framework */,
 				111A141B1024C875002D39A1 /* CoreLocation.framework */,
