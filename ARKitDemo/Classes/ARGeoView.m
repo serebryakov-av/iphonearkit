@@ -6,11 +6,11 @@
 //  Copyright 2009 Zac White. All rights reserved.
 //
 
-#import "ARGeoViewController.h"
+#import "ARGeoView.h"
 
 #import "ARGeoCoordinate.h"
 
-@implementation ARGeoViewController
+@implementation ARGeoView
 
 @synthesize centerLocation;
 

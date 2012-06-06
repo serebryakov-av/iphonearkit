@@ -8,9 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
-#import "ARViewController.h"
+#import "ARView.h"
 
-@interface ARGeoViewController : ARViewController {
+@interface ARGeoView : ARView {
 	CLLocation *centerLocation;
 }
 

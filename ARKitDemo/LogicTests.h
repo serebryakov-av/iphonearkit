@@ -16,7 +16,7 @@
 
 #import "ARGeoCoordinate.h"
 #import "ARCoordinate.h"
-#import "ARViewController.h"
+#import "ARView.h"
 #import "ARCoordinate.h"
 
 

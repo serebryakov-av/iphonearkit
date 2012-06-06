@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
+#import <AVFoundation/AVFoundation.h>
 #import <CoreLocation/CoreLocation.h>
 
 #import "ARCoordinate.h"
@@ -19,13 +20,12 @@
 @end
 
 
-@interface ARViewController : UIViewController <UIAccelerometerDelegate, CLLocationManagerDelegate> {
+@interface ARView : UIView <AVCaptureVideoDataOutputSampleBufferDelegate, UIAccelerometerDelegate, CLLocationManagerDelegate>
+{
 	CLLocationManager *locationManager;
 	UIAccelerometer *accelerometerManager;
 	
 	ARCoordinate *centerCoordinate;
-	
-	UIImagePickerController *cameraController;
 	
 	NSObject<ARViewDelegate> *delegate;
 	NSObject<CLLocationManagerDelegate> *locationDelegate;
@@ -46,7 +46,10 @@
 	
 	NSTimer *_updateTimer;
 	
-	UIView *ar_overlayView;
+	UIImageView *ar_videoImageView;
+	AVCaptureSession *captureSession;
+	AVCaptureDeviceInput *captureDeviceInput;
+	AVCaptureVideoDataOutput *captureVideoDataOutput;
 	
 	UILabel *ar_debugView;
 	
@@ -88,13 +91,12 @@
 - (id)initWithLocationManager:(CLLocationManager *)manager;
 
 - (void)startListening;
+- (void)stopListening;
 - (void)updateLocations:(NSTimer *)timer;
 
 - (CGPoint)pointInView:(UIView *)realityView forCoordinate:(ARCoordinate *)coordinate;
 
 - (BOOL)viewportContainsCoordinate:(ARCoordinate *)coordinate;
-
-@property (nonatomic, retain) UIImagePickerController *cameraController;
 
 @property (nonatomic, assign) NSObject<ARViewDelegate> *delegate;
 @property (nonatomic, assign) NSObject<CLLocationManagerDelegate> *locationDelegate;

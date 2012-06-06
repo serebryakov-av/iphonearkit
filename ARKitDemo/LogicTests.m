@@ -79,7 +79,7 @@
 
 - (void)testViewportContainsCenter {
 	
-	ARViewController *viewController = [[ARViewController alloc] init];
+	ARView *viewController = [[ARView alloc] init];
 	viewController.debugMode = NO;
 	
 	ARCoordinate *coordinate = [[ARCoordinate alloc] init];

@@ -8,13 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-#import "ARGeoViewController.h"
-
-@interface ARKitDemoAppDelegate : NSObject <UIApplicationDelegate, ARViewDelegate> {
+@interface ARKitDemoAppDelegate : NSObject <UIApplicationDelegate> {
     UIWindow *window;
 }
-
-- (UIView *)viewForCoordinate:(ARCoordinate *)coordinate;
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
 
