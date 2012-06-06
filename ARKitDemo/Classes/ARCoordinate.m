@@ -9,6 +9,8 @@
 #import "ARCoordinate.h"
 
 
+#define radiansToDegrees(x) (x * (180.0/M_PI))
+
 @implementation ARCoordinate
 
 @synthesize radialDistance, inclination, azimuth;
