@@ -12,6 +12,12 @@
 
 @implementation MainVC
 
+- (void)dealloc
+{
+	[geoView release];
+	[super dealloc];
+}
+
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
@@ -105,19 +111,18 @@
 	if (![self isViewLoaded])
 		return nil;
 	
-	geoView = [[[ARGeoView alloc] init] autorelease];
+	geoView = [[ARGeoView alloc] init];
 	geoView.frame = self.view.bounds;
 	geoView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
 	geoView.delegate = self;
 	geoView.scaleViewsBasedOnDistance = YES;
 	geoView.minimumScaleFactor = .5;
 	geoView.rotateViewsBasedOnPerspective = YES;
-	geoView.maximumDrawDistance = -1;
+	geoView.maximumDrawDistance = 15000;
 	
 	[self addDemoData];
 	
 	[self.view addSubview:geoView];
-	
 	return geoView;
 }
 
