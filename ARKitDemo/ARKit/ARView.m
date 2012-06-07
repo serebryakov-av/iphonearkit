@@ -10,7 +10,7 @@
 
 #import <QuartzCore/QuartzCore.h>
 
-#define VIEWPORT_WIDTH_RADIANS (.5 + .2)
+#define VIEWPORT_WIDTH_RADIANS (.5 + .1)
 #define VIEWPORT_HEIGHT_RADIANS (.7392 + .2)
 
 @implementation ARView
@@ -91,10 +91,11 @@
 	if (!captureDeviceInput)
 	{
 		AVCaptureDevice *vid_dev = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
-		captureDeviceInput = [AVCaptureDeviceInput deviceInputWithDevice:vid_dev error:nil];
+		if ([vid_dev supportsAVCaptureSessionPreset:AVCaptureSessionPresetMedium])
+			captureDeviceInput = [AVCaptureDeviceInput deviceInputWithDevice:vid_dev error:nil];
 	}
 	
-	if (!captureVideoDataOutput)
+	if (captureDeviceInput && !captureVideoDataOutput)
 	{
 		/*We setupt the output*/
 		captureVideoDataOutput = [[AVCaptureVideoDataOutput alloc] init];
@@ -118,7 +119,7 @@
 		[captureVideoDataOutput setVideoSettings:videoSettings];
 	}
 	
-	if (!captureSession)
+	if (captureDeviceInput && captureVideoDataOutput && !captureSession)
 	{
 		/*And we create a capture session*/
 		captureSession = [[AVCaptureSession alloc] init];
@@ -265,13 +266,16 @@
 		//we want every move.
 		self.locationManager.headingFilter = kCLHeadingFilterNone;
 		self.locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation;
-		
-		[self.locationManager startUpdatingHeading];
-		[self.locationManager startUpdatingLocation];
 	}
 	
-	//steal back the delegate.
-	self.locationManager.delegate = self;
+	if (self.locationManager)
+	{
+		[self.locationManager startUpdatingHeading];
+		[self.locationManager startUpdatingLocation];
+		
+		//steal back the delegate.
+		self.locationManager.delegate = self;
+	}
 	
 	if (!self.accelerometerManager)
 	{
